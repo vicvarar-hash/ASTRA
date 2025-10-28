@@ -5,7 +5,7 @@
 ## Repository Structure
 
 ```
-astra/
+ASTRA/
 ├── README.md                         # Project documentation
 ├── LICENSE                           # License information
 ├── data/                             # Dataset 
