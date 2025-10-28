@@ -2,14 +2,14 @@
 
 > You can find out more on the [overview page here](https://outshift-open.github.io/ASTRA), or read the [full paper here](https://arxiv.org/).
 
-This repository contains an open-source dataset for task-tool matching in the context of MCP Servers. The core data resides in the `data/` directory, which is divided by task complexity: `01_tool`, `02_tools`, and `03_tools` contain datasets for tasks requiring one, two, or three tools, respectively. Each of these directories is further split into `ASTRA` (our generated data) and `TOUCAN` (processed TOUCAN data), with files for generated tasks, validation, and test splits, or processed tasks and validation data respectively. The `mcp_servers/` folder holds the MCP Server configuration files used in data generation, separated for `ASTRA` and `TOUCAN` sources and containing JSON files for each server.
+This repository contains an open-source dataset for task-tool matching in the context of MCP Servers. The core data resides in the `data/` directory, which is divided by task complexity: `01_tool`, `02_tools`, and `03_tools` contain datasets for tasks requiring one, two, or three tools, respectively. Each of these directories is further split into `ASTRA` (our generated data) and `TOUCAN` (processed [TOUCAN](https://arxiv.org/abs/2510.01179) data), with files for generated tasks, validation, and test splits, or processed tasks and validation data respectively. The `mcp_servers/` folder holds the MCP Server configuration files used in data generation, separated for `ASTRA` and `TOUCAN` sources and containing JSON files for each server.
 
 ## Key Features
 - **Synthetic Multi-Tool Tasks**: Agentic tasks are generated using real-world MCP Servers (e.g., Wikipedia, GitHub) with sets of $N$ tools ($N \in [1, 2, 3]$), ensuring semantic coherence and realism.
 - **Simulated Tool Matching**: Includes both correct and simulated incorrect tool matches:
     - Wrong matches: Tools from the same MCP Server
     - Null matches: Tools from different MCP Servers
-- **TOUCAN Data Integration**: Curated and pre-processed subset of the [TOUCAN dataset](https://arxiv.org/abs/2510.01179) for direct comparison, with consistent formatting and quality controls.
+- **TOUCAN Data Integration**: Curated and pre-processed subset of the [TOUCAN dataset](https://github.com/TheAgentArk/Toucan) for direct comparison, with consistent formatting and quality controls.
 - **Comprehensive Metadata**: All tool names, descriptions (with arguments removed), and server metadata are included.
 
 ## Data Overview
