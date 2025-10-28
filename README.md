@@ -1,6 +1,6 @@
 # ASTRA - Authorization with Semantic Task-based Restricted Access 
 
-[Landing Page](outshift-open.github.io/astra)
+[Landing Page](https://outshift-open.github.io/ASTRA)
 
 ## Repository Structure
 
