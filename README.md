@@ -71,8 +71,8 @@ ASTRA/
 
 ## Roadmap
 
-See the [open issues](https://github.com/outshift-open/ASTRA/issues) for a list
-of proposed features (and known issues).
+See [open issues](https://github.com/outshift-open/ASTRA/issues) for a list
+of proposed features and known issues.
 
 ## Contributing
 
