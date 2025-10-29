@@ -36,7 +36,7 @@ ASTRA/
 │   │   │   └── validation.json       # Validation data split
 │   │   └── TOUCAN/                   # TOUCAN-processed data
 │   │       ├── processed.json        # Processed tasks for MCP Server tools
-│   │       └── validation.json       # Validation data
+│   │       └── test.json             # Test data
 │   │
 │   ├── 02_tools/                     # Data for tasks with two tools...
 │   │   ├── ASTRA/                    # ...following the same structure as above
@@ -45,7 +45,7 @@ ASTRA/
 │   │   │   └── validation.json
 │   │   └── TOUCAN/
 │   │       ├── processed.json
-│   │       └── validation.json
+│   │       └── test.json
 │   │
 │   ├── 03_tools/                     # Data for tasks with three tools...
 │   │   ├── ASTRA/                    # ...following the same structure as above
@@ -54,7 +54,7 @@ ASTRA/
 │   │   │   └── validation.json
 │   │   └── TOUCAN/
 │   │       ├── processed.json
-│   │       └── validation.json
+│   │       └── test.json
 │   │
 │   └── mcp_servers/                  # MCP Server configurations
 │       ├── ASTRA/                    # ASTRA MCP Server configs
