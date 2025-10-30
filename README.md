@@ -11,7 +11,7 @@ This repository contains an an open-source dataset for task-tool matching in the
   - Wrong matches: Tools from the same MCP Server
   - Null matches: Tools from different MCP Servers
 - **TOUCAN Data Integration**: Curated and pre-processed subset of the [TOUCAN dataset](https://github.com/TheAgentArk/Toucan) for direct comparison, with consistent formatting and quality controls.
-- **Comprehensive Metadata**: All tool names, descriptions (with arguments removed), and server metadata are included.
+- **Comprehensive Metadata**: All tool names, descriptions, and server metadata are included.
 
 ## Data Overview
 
