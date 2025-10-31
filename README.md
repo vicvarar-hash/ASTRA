@@ -1,8 +1,8 @@
 # ASTRA - Authorization with Semantic Task-based Restricted Access
 
-> You can find out more on the [overview page here](https://outshift-open.github.io/ASTRA), or read the [full paper here](https://arxiv.org/).
+> You can find out more on the [overview page here](https://outshift-open.github.io/ASTRA), or read the [full paper here](https://arxiv.org/abs/2510.26702).
 
-This repository contains an an open-source dataset for task-tool matching in the context of delegated authorization flows, as described in our [paper](https://arxiv.org/). The core data resides in the `data/` directory, which is divided by task complexity: `01_tool`, `02_tools`, and `03_tools` contain datasets for tasks requiring one, two, or three tools, respectively. Each of these directories is further split into `ASTRA` (our generated data) and `TOUCAN` (processed [TOUCAN](https://arxiv.org/abs/2510.01179) data), with files for generated tasks, validation, and test splits, or processed tasks and test data respectively. The `mcp_servers/` folder holds the MCP Server configuration files used in data generation, separated for `ASTRA` and `TOUCAN` sources and containing JSON files for each server.
+This repository contains an an open-source dataset for task-tool matching in the context of delegated authorization flows, as described in our [paper](https://arxiv.org/abs/2510.26702). The core data resides in the `data/` directory, which is divided by task complexity: `01_tool`, `02_tools`, and `03_tools` contain datasets for tasks requiring one, two, or three tools, respectively. Each of these directories is further split into `ASTRA` (our generated data) and `TOUCAN` (processed [TOUCAN](https://arxiv.org/abs/2510.01179) data), with files for generated tasks, validation, and test splits, or processed tasks and test data respectively. The `mcp_servers/` folder holds the MCP Server configuration files used in data generation, separated for `ASTRA` and `TOUCAN` sources and containing JSON files for each server.
 
 ## Key Features
 
@@ -21,7 +21,7 @@ This repository contains an an open-source dataset for task-tool matching in the
 
 ## Citation
 
-If you use this dataset then please cite our [paper](https://arxiv.org/).
+If you use this dataset then please cite our [paper](https://arxiv.org/abs/2510.26702).
 
 ## Repository Structure
 
