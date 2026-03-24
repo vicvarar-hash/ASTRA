@@ -32,8 +32,16 @@ mock_policy = {
 }
 # We will instantiate TS-PHOL dynamically in run_experiment
 
-
-@app.get("/")
+def load_functional_descriptions(dataset_type: str) -> dict:
+    import os, json
+    path = os.path.join(os.path.dirname(__file__), '..', 'data_cache', f'{dataset_type}_functional_descriptions.json')
+    if os.path.exists(path):
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            return {}
+    return {}
 def health_check():
     return {"status": "ok", "message": "TS-PHOL API is running"}
 
@@ -81,7 +89,8 @@ def run_experiment(payload: Dict[str, Any]):
             requested_mcp_servers=item["requested_mcp_servers"],
             provider=provider,
             api_key=api_key,
-            semsim_threshold=payload.get("semsim_threshold", 0.8)
+            semsim_threshold=payload.get("semsim_threshold", 0.8),
+            functional_tool_descriptions=load_functional_descriptions(dataset_type)
         )
         
         # Run SemSimM
@@ -148,6 +157,7 @@ def stream_experiment(payload: Dict[str, Any]):
         policy_rules = payload.get("policy_rules", {})
         
         dynamic_tsphol = TSPholeEngine(policy_rules)
+        functional_descriptions = load_functional_descriptions(dataset_type)
         semsim_matcher = SemanticSimilarityMatcher()
         llm_matcher = LLMReasoningMatcher()
         
@@ -178,7 +188,8 @@ def stream_experiment(payload: Dict[str, Any]):
                 requested_mcp_servers=item["requested_mcp_servers"],
                 provider=provider,
                 api_key=api_key,
-                semsim_threshold=payload.get("semsim_threshold", 0.8)
+                semsim_threshold=payload.get("semsim_threshold", 0.8),
+                functional_tool_descriptions=functional_descriptions
             )
             
             semsim_res = semsim_matcher.evaluate(req)

@@ -100,16 +100,24 @@ def classify_tools_batch(tool_batch: dict, provider: str, api_key: str) -> dict:
 Your task is to classify each tool below into the provided Abstract Capability categories.
 Since tools can span multiple operational domains, you must choose up to 3 of the MOST SPECIFIC categories that apply. Every tool must be assigned at least one category.
 
+Additionally, for each tool, provide a concise 1-sentence "Functional Summary" (maximum 15 words) describing the functional OUTCOME of using the tool in layman's terms (e.g., "Write text to a document", "Search for cloud resources", "Modify security rules"). Avoid technical API jargon like "patch", "children", or technical implementation details.
+
 Abstract Capability Taxonomy:
 {taxonomy_str}
 
 Tools to classify:
 {tool_list_str}
 
-Output ONLY a raw valid JSON object (no markdown, no explanation) mapping each tool name to a list of its capabilities:
+Output ONLY a raw valid JSON object (no markdown, no explanation) mapping each tool name to its capabilities and its functional summary:
 {{
-  "tool_name_1": ["Abstract_Capability_A", "Abstract_Capability_B"],
-  "tool_name_2": ["Abstract_Capability_C"]
+  "tool_name_1": {{
+    "capabilities": ["Abstract_Capability_A", "Abstract_Capability_B"],
+    "summary": "1-sentence functional summary here"
+  }},
+  "tool_name_2": {{
+    "capabilities": ["Abstract_Capability_C"],
+    "summary": "Another 1-sentence functional summary"
+  }}
 }}
 """
 
@@ -176,7 +184,13 @@ def build_policy_graph(tool_classifications: dict) -> dict:
     {abstract_capability: [tool_name, ...]}
     """
     policy_graph = {}
-    for tool_name, capabilities in tool_classifications.items():
+    for tool_name, info in tool_classifications.items():
+        if isinstance(info, list):
+            # Backwards compatibility for old cache
+            capabilities = info
+        else:
+            capabilities = info.get("capabilities", [])
+            
         if isinstance(capabilities, str):
             capabilities = [capabilities]
             
@@ -208,9 +222,9 @@ def generate_all_policies(provider: str = "openai"):
         return
 
     for dataset_type in ["ASTRA", "TOUCAN"]:
-        print(f"\n{'─'*50}")
+        print(f"\n{'-'*50}")
         print(f"[*] Processing dataset: {dataset_type}")
-        print(f"{'─'*50}")
+        print(f"{'-'*50}")
 
         # Step 1: Load ALL tools from all MCP servers
         tools_library = load_all_mcp_tools(dataset_type)
@@ -245,7 +259,21 @@ def generate_all_policies(provider: str = "openai"):
             print(f"      {capability}: {len(tools)} tools")
         print(f"\n  [+] Total tools classified: {total_classified} / {len(tools_library)}")
 
-        # Step 4: We generate one policy per complexity level
+        # Step 4: Extract and save functional summaries
+        functional_summaries = {}
+        for tool_name, info in all_classifications.items():
+            if isinstance(info, dict) and "summary" in info:
+                functional_summaries[tool_name] = info["summary"]
+        
+        summary_path = os.path.join(
+            os.path.dirname(__file__), '..', 'data_cache',
+            f'{dataset_type}_functional_descriptions.json'
+        )
+        with open(summary_path, 'w', encoding='utf-8') as f:
+            json.dump(functional_summaries, f, indent=2)
+        print(f"  [+] Saved Functional Summaries: {summary_path}")
+
+        # Step 5: We generate one policy per complexity level
         # (Since the tools don't change by complexity, we apply the same graph to all 3 levels)
         for complexity in [1, 2, 3]:
             output_path = os.path.join(

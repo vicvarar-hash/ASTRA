@@ -10,6 +10,7 @@ class AuthRequest(BaseModel):
     task_text: str
     requested_tools: List[str]
     tool_descriptions: Dict[str, str]
+    functional_tool_descriptions: Optional[Dict[str, str]] = None
     requested_mcp_servers: List[str]
     provider: Optional[str] = "openai"
     api_key: Optional[str] = None
@@ -18,5 +19,6 @@ class AuthRequest(BaseModel):
 class AuthResponse(BaseModel):
     decision: str  # "ALLOW" or "DENY"
     reasoning: Optional[str] = None
+    matcher_type: str
     matcher_type: str
     execution_logs: Optional[Dict[str, Any]] = None
